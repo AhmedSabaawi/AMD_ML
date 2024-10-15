@@ -1,22 +1,20 @@
 import gym
 
-def run_taxi_episode():
-    env = gym.make("Taxi-v3")
+def create_taxi_env():
+    # Create the Taxi-v3 environment
+    env = gym.make('Taxi-v3')
+    return env
+
+def reset_taxi_env(env):
+    # Reset the environment to the initial state
     state = env.reset()
-    done = False
-    steps = []
-    total_reward = 0
+    return state
 
-    while not done:
-        action = env.action_space.sample()  # Random action, replace with your RL agent
-        next_state, reward, done, _ = env.step(action)
-        total_reward += reward
-        steps.append({
-            "state": state,
-            "action": action,
-            "next_state": next_state,
-            "reward": reward
-        })
-        state = next_state
+def step_taxi_env(env, action):
+    # Take a step in the environment
+    next_state, reward, done, info = env.step(action)
+    return next_state, reward, done, info
 
-    return {"steps": steps, "total_reward": total_reward}
+def render_taxi_env(env):
+    # Render the environment as a string (for textual output)
+    return env.render()
