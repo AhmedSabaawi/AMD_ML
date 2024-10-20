@@ -1,5 +1,6 @@
 package com.example.ai_taxi
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -34,9 +35,16 @@ import com.example.ai_taxi.R
 import com.example.ai_taxi.ui.theme.AI_TaxiTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var mp: MediaPlayer
+    private var mediaplayerInitialized = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            mp = MediaPlayer.create(this, R.raw.background_music)
+            mp.isLooping = true
+            mp.start()
+            mediaplayerInitialized = true
             AI_TaxiTheme {
                 // Initialize Navigation
                 val navController = rememberNavController()
@@ -44,10 +52,54 @@ class MainActivity : ComponentActivity() {
                     composable("main") { MainScreen(navController) }
                     composable("menu") { MenuScreen(navController) }
                 }
+
             }
         }
     }
+    //What the app does when the user ends its process (quits the app)
+    override fun onDestroy() {
+        super.onDestroy()
+
+        if (this::mp.isInitialized){
+            mp.release()
+        }
+    }
+
+    //what it does when you tab out from the app
+    override fun onPause() {
+        super.onPause()
+
+
+//        if (mp.isPlaying){
+//            try {
+//                mp.pause()
+//            }catch (e: IllegalStateException){
+//                e.printStackTrace()
+//            }
+//
+//        }
+
+
+
+    }
+
+
+    //what it does when you tab back in to the app
+    override fun onResume() {
+        super.onResume()
+
+//        try {
+//            mp.start()
+//        }catch (e: IllegalStateException){
+//            e.printStackTrace()
+//        }
+//
+//    }
+
+
 }
+
+    //TODO: (Optional) Make a fun for mediaplayer so its accessible in one place.
 
 @Composable
 fun MainScreen(navController: NavController) {
@@ -153,8 +205,8 @@ fun SliderItem(title: String, description: String) {
         Slider(
             value = sliderValue,
             onValueChange = { sliderValue = it },
-            valueRange = 0f..100f,
-            steps = 99,
+            valueRange = 0f..1f,
+            steps = 100,
             colors = SliderDefaults.colors(
                 thumbColor = Color.Black,
                 activeTrackColor = Color.Black,
@@ -165,7 +217,7 @@ fun SliderItem(title: String, description: String) {
 
         // Display the current slider value
         Text(
-            text = "${sliderValue.toInt()}%", // Display as integer
+            text = String.format("%.2f", sliderValue), // Display as integer
             fontSize = 16.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(vertical = 4.dp)
@@ -222,4 +274,4 @@ fun DefaultPreview() {
     AI_TaxiTheme {
         MainScreen(rememberNavController())
     }
-}
+}}
