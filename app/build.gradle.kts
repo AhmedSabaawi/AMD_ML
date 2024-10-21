@@ -55,8 +55,8 @@ android {
 
     flavorDimensions += "pyVersion"
     productFlavors {
-        create("py310") { dimension = "pyVersion" }
-        create("py311") { dimension = "pyVersion" }
+        //create("py310") { dimension = "pyVersion" }
+        //create("py311") { dimension = "pyVersion" }
     }
 }
 
@@ -64,15 +64,15 @@ chaquopy {
 
 
     productFlavors {
-        getByName("py310") { version = "3.10" }
-        getByName("py311") { version = "3.11" }
+        //getByName("py310") { version = "3.10" }
+        //getByName("py311") { version = "3.11" }
     }
     defaultConfig {
         pip {
             // A requirement specifier, with or without a version number:
 
 
-            install ("gym")
+            //install ("gym")
 
 
 
