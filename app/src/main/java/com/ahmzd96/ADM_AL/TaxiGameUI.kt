@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.ahmzd96.ADM_AL.viewmodel.TaxiGameViewModel
+import com.ahmzd96.ADM_AL.viewmodels.TaxiGameViewModel
 import kotlinx.coroutines.launch
 
 @Composable

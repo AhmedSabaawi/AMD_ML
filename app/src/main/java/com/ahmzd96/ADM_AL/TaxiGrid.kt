@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,7 +24,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.ahmzd96.ADM_AL.viewmodel.TaxiGameViewModel
+import com.ahmzd96.ADM_AL.viewmodels.TaxiGameViewModel
+
 @Composable
 fun TaxiGridScreen(viewModel: TaxiGameViewModel, navController: NavController) {
     val taxiState = viewModel.taxiState.observeAsState(0).value

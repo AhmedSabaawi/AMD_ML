@@ -1,13 +1,11 @@
 // File: TaxiGameViewModel.kt
-package com.ahmzd96.ADM_AL.viewmodel // Adjust the package name to match your project structure
+package com.ahmzd96.ADM_AL.viewmodels // Adjust the package name to match your project structure
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 class TaxiGameViewModel : ViewModel() {
     private val _rewardHistory = MutableStateFlow(listOf<Float>())

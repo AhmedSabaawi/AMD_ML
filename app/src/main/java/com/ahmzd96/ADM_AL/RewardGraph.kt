@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.ahmzd96.ADM_AL.viewmodel.TaxiGameViewModel
+import com.ahmzd96.ADM_AL.viewmodels.TaxiGameViewModel
 
 @Composable
 fun RewardGraph(viewModel: TaxiGameViewModel, navController: NavController) {
