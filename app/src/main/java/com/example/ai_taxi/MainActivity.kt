@@ -10,10 +10,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.ai_taxi.ui.theme.AI_TaxiTheme
-import com.example.ai_taxi.ui.theme.screens.QTable
-import com.example.ai_taxi.ui.theme.screens.Menu
-import com.example.ai_taxi.ui.theme.screens.MainMenu
-import com.example.ai_taxi.ui.theme.screens.Start
+import com.example.ai_taxi.ui.screens.QTable
+import com.example.ai_taxi.ui.screens.Menu
+import com.example.ai_taxi.ui.screens.MainMenu
+import com.example.ai_taxi.ui.screens.Start
 
 class MainActivity : ComponentActivity() {
     private lateinit var mp: MediaPlayer

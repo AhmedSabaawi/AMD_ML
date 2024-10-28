@@ -1,4 +1,4 @@
-package com.example.testrender.ui.screens
+package com.example.ai_taxi.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -61,12 +61,6 @@ fun RenderGameScreen(
             contentScale = ContentScale.FillBounds)
     ){
 
-//        Image(
-//            painter= painterResource(R.drawable.chart),
-//            contentDescription = "Chart",
-//            modifier = Modifier
-//                .fillMaxSize()
-//        )
         Box(
 
             modifier = Modifier

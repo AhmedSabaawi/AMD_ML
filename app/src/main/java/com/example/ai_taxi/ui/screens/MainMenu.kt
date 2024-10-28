@@ -1,4 +1,4 @@
-package com.example.ai_taxi.ui.theme.screens
+package com.example.ai_taxi.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

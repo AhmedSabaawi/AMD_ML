@@ -1,8 +1,8 @@
-package com.example.ai_taxi.ui.theme.screens
+package com.example.ai_taxi.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavController
-import com.example.testrender.ui.screens.RenderGameScreen
+
 
 @Composable
 fun Start(navController: NavController){

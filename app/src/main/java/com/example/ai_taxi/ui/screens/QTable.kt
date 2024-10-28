@@ -1,4 +1,4 @@
-package com.example.ai_taxi.ui.theme.screens
+package com.example.ai_taxi.ui.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
