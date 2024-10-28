@@ -30,24 +30,24 @@ fun RenderGameScreen(
 
 
 
-    Row { Button(onClick ={viewModel.setValue(
-        xPosition+1,
-        yPosition+0)},
-        modifier = Modifier
-            .size(100.dp)
-            .zIndex(2f))
-        {
-        Text(text = "Move")
-        }
-        Button(onClick ={viewModel.setValue(0,0)},
-            modifier = Modifier
-                .size(100.dp)
-                .zIndex(2f))
-        {
-            Text(text = "Reset")
-        }
-        Text(text = "x=$xPosition, y=$yPosition")
-    }
+//    Row { Button(onClick ={viewModel.setValue(
+//        xPosition+1,
+//        yPosition+0)},
+//        modifier = Modifier
+//            .size(100.dp)
+//            .zIndex(2f))
+//        {
+//        Text(text = "Move")
+//        }
+//        Button(onClick ={viewModel.setValue(0,0)},
+//            modifier = Modifier
+//                .size(100.dp)
+//                .zIndex(2f))
+//        {
+//            Text(text = "Reset")
+//        }
+//        Text(text = "x=$xPosition, y=$yPosition")
+//    }
 
 
 
