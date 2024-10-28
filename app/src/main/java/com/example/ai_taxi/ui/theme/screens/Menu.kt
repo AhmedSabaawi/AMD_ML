@@ -1,6 +1,5 @@
-package com.example.ai_taxi.ui.theme.Screens
+package com.example.ai_taxi.ui.theme.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -11,19 +10,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.ai_taxi.R
-import com.example.ai_taxi.ui.theme.components.ButtonBox
-import com.example.ai_taxi.ui.theme.components.SliderItem
-import com.example.ai_taxi.ui.theme.components.logo
+import com.example.ai_taxi.components.ButtonBox
+import com.example.ai_taxi.components.SliderItem
+import com.example.ai_taxi.components.logo
 
 @Composable
 fun Menu(navController: NavController){

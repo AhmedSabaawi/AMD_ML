@@ -1,4 +1,4 @@
-package com.example.ai_taxi.ui.theme.components
+package com.example.ai_taxi.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
