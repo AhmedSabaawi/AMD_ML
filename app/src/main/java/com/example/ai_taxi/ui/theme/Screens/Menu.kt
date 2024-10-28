@@ -23,6 +23,7 @@ import androidx.navigation.NavController
 import com.example.ai_taxi.R
 import com.example.ai_taxi.ui.theme.components.ButtonBox
 import com.example.ai_taxi.ui.theme.components.SliderItem
+import com.example.ai_taxi.ui.theme.components.logo
 
 @Composable
 fun Menu(navController: NavController){
@@ -44,12 +45,7 @@ fun Menu(navController: NavController){
                 .height(150.dp),
             contentAlignment = Alignment.Center
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.taxi_logo),
-                contentDescription = "Taxi Logo",
-                contentScale = ContentScale.Fit,
-                modifier = Modifier.fillMaxSize()
-            )
+            logo()
         }
 
         // Slider items with descriptions
