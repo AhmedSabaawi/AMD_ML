@@ -19,40 +19,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ai_taxi.R
-import com.example.ai_taxi.viewmodels.RenderGameViewModel
+import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 @Composable
 fun RenderGameScreen(
-    viewModel: RenderGameViewModel = viewModel()
+    viewModel: TaxiGameViewModel = viewModel()
 ) {
-    val xPosition by viewModel.x.collectAsState()
-    val yPosition by viewModel.y.collectAsState()
+//    val xPosition by viewModel.x.collectAsState()
+//    val yPosition by viewModel.y.collectAsState()
 
-
-
-//    Row { Button(onClick ={viewModel.setValue(
-//        xPosition+1,
-//        yPosition+0)},
-//        modifier = Modifier
-//            .size(100.dp)
-//            .zIndex(2f))
-//        {
-//        Text(text = "Move")
-//        }
-//        Button(onClick ={viewModel.setValue(0,0)},
-//            modifier = Modifier
-//                .size(100.dp)
-//                .zIndex(2f))
-//        {
-//            Text(text = "Reset")
-//        }
-//        Text(text = "x=$xPosition, y=$yPosition")
-//    }
-
-
-
-
-
+    val xPosition = 0
+    val yPosition= 0
 
     Box( modifier= Modifier
         .fillMaxSize()
