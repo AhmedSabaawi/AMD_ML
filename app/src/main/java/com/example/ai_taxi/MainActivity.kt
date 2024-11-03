@@ -4,8 +4,10 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -14,10 +16,14 @@ import com.example.ai_taxi.ui.screens.QTable
 import com.example.ai_taxi.ui.screens.Menu
 import com.example.ai_taxi.ui.screens.MainMenu
 import com.example.ai_taxi.ui.screens.Start
+import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 class MainActivity : ComponentActivity() {
     private lateinit var mp: MediaPlayer
     private var mediaplayerInitialized = false
+
+    //Initiates the apps viewmodel, from here its gets passed to each component that needs the apps info
+    private val taxiGameViewModel:  TaxiGameViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,10 +36,10 @@ class MainActivity : ComponentActivity() {
                 // Initialize Navigation
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "main") {
-                    composable("main") { MainMenu(navController) }
-                    composable("menu") { Menu(navController) }
-                    composable("qtable") { QTable(navController)  }
-                    composable ("Start"){ Start(navController)  }
+                    composable("main") { MainMenu(navController, taxiGameViewModel) }
+                    composable("menu") { Menu(navController, taxiGameViewModel) }
+                    composable("qtable") { QTable(navController, taxiGameViewModel)  }
+                    composable ("Start"){ Start(navController, taxiGameViewModel)  }
                 }
 
             }

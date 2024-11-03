@@ -13,12 +13,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.ai_taxi.components.ButtonBox
 import com.example.ai_taxi.components.logo
+import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 @Composable
-fun MainMenu(navController: NavController){
+fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewModel()){
 
     val backgroundColor = Color(0xFFD0D0CF)
 
