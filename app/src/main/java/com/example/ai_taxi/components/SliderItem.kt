@@ -23,9 +23,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ai_taxi.components.SliderValues
+import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 @Composable
-fun SliderItem(title: String, description: String) {
+fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel = viewModel()) {
+
+
+    //TODO: Match Funktion
+    var loadedValue by remember { mutableStateOf(loadData(title)) }
     var sliderValue by remember { mutableStateOf(0f) }
     var showDescription by remember { mutableStateOf(false) } // For controlling the description dialog
 
@@ -52,7 +60,10 @@ fun SliderItem(title: String, description: String) {
 
         Slider(
             value = sliderValue,
-            onValueChange = { sliderValue = it },
+            onValueChange = {
+                sliderValue = it
+                            saveData(title, sliderValue) //Saves the value
+                            },
             valueRange = 0f..1f,
             steps = 100,
             colors = SliderDefaults.colors(
@@ -93,5 +104,19 @@ fun SliderItem(title: String, description: String) {
                 }
             )
         }
+
+
     }
+
+
+
+}
+
+fun saveData(dataName: String, dataToSave: Float) {
+
+
+}
+
+fun loadData(valueName:String){
+
 }
