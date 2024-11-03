@@ -79,6 +79,12 @@ class TaxiGameViewModel : ViewModel() {
         _decay.value = newDecay
     }
 
+    fun getEpsilon():Float{ return _epsilon.value}
+    fun getAlpha():Float{return _alpha.value}
+    fun getGamma():Float{return _gamma.value}
+    fun getDecay():Float{return _decay.value}
+
+
     fun updateVisualization(newVisualization: Boolean) {
         _visualization.value = newVisualization
     }

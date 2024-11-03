@@ -26,15 +26,35 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
+import com.example.ai_taxi.MenuValues
 
 @Composable
 fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel = viewModel()) {
 
 
+    fun saveData(newValue: Float){
+        when (MenuValues.valueOf(title.uppercase())){
+            MenuValues.GAMMA -> viewModel.updateGamma(newValue)
+            MenuValues.EPSILON -> viewModel.updateEpsilon(newValue)
+            MenuValues.DECAY -> viewModel.updateDecay(newValue)
+            MenuValues.ALPHA -> viewModel.updateAlpha(newValue)
+        }}
+
+    fun loadData():Float{
+        return when (MenuValues.valueOf(title.uppercase())){
+            MenuValues.GAMMA -> viewModel.getGamma()
+            MenuValues.EPSILON -> viewModel.getEpsilon()
+            MenuValues.DECAY -> viewModel.getDecay()
+            MenuValues.ALPHA -> viewModel.getAlpha()
+        }
+    }
+
     //TODO: Match Funktion
-    var loadedValue by remember { mutableStateOf(loadData(title)) }
-    var sliderValue by remember { mutableStateOf(0f) }
+    var sliderValue by remember { mutableStateOf(loadData()) }
     var showDescription by remember { mutableStateOf(false) } // For controlling the description dialog
+
+
+
 
     Column(
         modifier = Modifier
@@ -61,7 +81,7 @@ fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel 
             value = sliderValue,
             onValueChange = {
                 sliderValue = it
-                            saveData(title, sliderValue) //Saves the value
+                saveData(it) //Saves the value
                             },
             valueRange = 0f..1f,
             steps = 100,
@@ -109,13 +129,7 @@ fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel 
 
 
 
-}
-
-fun saveData(dataName: String, dataToSave: Float) {
-
 
 }
 
-fun loadData(valueName:String){
 
-}
