@@ -77,7 +77,7 @@ fun SliderItem(title: String, description: String) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(text = "0", fontSize = 12.sp)
-            Text(text = "100", fontSize = 12.sp)
+            Text(text = "1.00", fontSize = 12.sp)
         }
 
         // Description Dialog
