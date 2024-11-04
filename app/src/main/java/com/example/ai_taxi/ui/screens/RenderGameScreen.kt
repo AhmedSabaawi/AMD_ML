@@ -25,11 +25,13 @@ import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 fun RenderGameScreen(
     viewModel: TaxiGameViewModel = viewModel()
 ) {
-//    val xPosition by viewModel.x.collectAsState()
-//    val yPosition by viewModel.y.collectAsState()
+    val xPosition by viewModel.x.collectAsState()
+    val yPosition by viewModel.y.collectAsState()
 
-    val xPosition = 0
-    val yPosition= 0
+    viewModel.startGame()
+
+//    val xPosition = 0
+//    val yPosition= 0
 
     Box( modifier= Modifier
         .fillMaxSize()

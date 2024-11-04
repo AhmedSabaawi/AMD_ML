@@ -49,7 +49,7 @@ fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewMo
         }
         ButtonBox(text = "RESET")
         ButtonBox(text = "QTABLE"){
-            navController.navigate("Qtable")
+            navController.navigate( "Qtable" )
         }
     }
 

@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                 NavHost(navController = navController, startDestination = "main") {
                     composable("main") { MainMenu(navController, taxiGameViewModel) }
                     composable("menu") { Menu(navController, taxiGameViewModel) }
-                    composable("qtable") { QTable(navController, taxiGameViewModel)  }
+                    composable("qtable") { QTable(navController,taxiGameViewModel.qValues) }
                     composable ("Start"){ Start(navController, taxiGameViewModel)  }
                 }
 

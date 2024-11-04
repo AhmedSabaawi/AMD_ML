@@ -1,12 +1,14 @@
 package com.example.ai_taxi.viewmodels
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ai_taxi.trainTaxiGame
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlin.math.log
 
 class TaxiGameViewModel : ViewModel() {
     private val _rewardHistory = MutableStateFlow(listOf<Float>())
@@ -91,6 +93,10 @@ class TaxiGameViewModel : ViewModel() {
 
     init {
         trainTaxiGame(sp, qValues, alpha.value, epsilon.value, gamma.value, decay.value, visualization = false)
+    }
+
+    fun startGame() {
+        trainTaxiGame(sp, qValues, alpha.value, epsilon.value, gamma.value, decay.value, visualization = false)
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
     }
@@ -133,7 +139,7 @@ class TaxiGameViewModel : ViewModel() {
             val pair = coordinatesList[i]
             _x.value += pair.first
             _y.value += pair.second
-//            Thread.sleep(500)
+            Log.d("Coordinates", "X: ${_x.value}, Y: ${_y.value}")
         }
     }
 
