@@ -6,19 +6,26 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.ai_taxi.trainTaxiGame
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import kotlin.math.log
 
 class
 TaxiGameViewModel : ViewModel() {
     private val _rewardHistory = MutableStateFlow(listOf<Float>())
     val rewardHistory: StateFlow<List<Float>> get() = _rewardHistory
-
-    private val _x = MutableStateFlow(20)
+    private val xStart= 1
+    private val yStart =4
+    private val _x = MutableStateFlow(xStart)
     val x: StateFlow<Int> =_x
-    private val _y = MutableStateFlow(50)
+    private val _y = MutableStateFlow(yStart)
     val y: StateFlow<Int> =_y
+
+
 
     private val _trained= MutableStateFlow(false)
     val trained: StateFlow<Boolean> = _trained
@@ -26,8 +33,8 @@ TaxiGameViewModel : ViewModel() {
 
     private val actions = listOf("south", "north", "east", "west", "pick-up", "drop-off")
     private val actionCoordinates = mapOf(
-        "south" to Pair(0, -1),
-        "north" to Pair(0, 1),
+        "south" to Pair(0, 1),
+        "north" to Pair(0, -1),
         "east" to Pair(1, 0),
         "west" to Pair(-1, 0),
         "pick-up" to Pair(0, 0),
@@ -84,6 +91,10 @@ TaxiGameViewModel : ViewModel() {
     fun updateDecay(newDecay: Float) {
         _decay.value = newDecay
     }
+
+    fun updateTrained(newTrained: Boolean){
+        _trained.value = newTrained
+    }
     fun resetParameters(){
         updateEpsilon(0.5f)
         updateAlpha(0.5f)
@@ -111,6 +122,8 @@ TaxiGameViewModel : ViewModel() {
         if (!trained.value){
             trainGame()
         }
+        _x.value=xStart
+        _y.value=yStart
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
     }
@@ -149,12 +162,14 @@ TaxiGameViewModel : ViewModel() {
 
 
     private fun iterateThroughList(coordinatesList: List<Pair<Int, Int>>) {
-        for(i in coordinatesList.indices) {
-            val pair = coordinatesList[i]
-            _x.value += pair.first
-            _y.value += pair.second
-            Log.d("Coordinates", "X: ${_x.value}, Y: ${_y.value}")
-            Thread.sleep(100)
+        CoroutineScope(Dispatchers.Main).launch {
+            for (i in coordinatesList.indices) {
+                val pair = coordinatesList[i]
+                _x.value += pair.first
+                _y.value += pair.second
+                Log.d("Coordinates", "X: ${_x.value}, Y: ${_y.value}")
+                delay(1000L)
+            }
         }
     }
 

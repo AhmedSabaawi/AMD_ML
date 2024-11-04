@@ -10,5 +10,5 @@ import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 @Composable
 fun Start(navController: NavController, viewModel: TaxiGameViewModel = viewModel()){
 
-    RenderGameScreen()
+    RenderGameScreen(viewModel)
 }
