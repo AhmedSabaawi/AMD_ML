@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -29,26 +30,33 @@ fun RenderGameScreen(
     val xPosition by viewModel.x.collectAsState()
     val yPosition by viewModel.y.collectAsState()
 
-    viewModel.startGame()
+    LaunchedEffect(Unit) {
+        viewModel.startGame()
+    }
+    val trained by viewModel.trained.collectAsState()
+    if(!trained) {
+        Text("Training in Progress")
+    }
+    else {
+        Box( modifier= Modifier
+            .fillMaxSize()
+            .aspectRatio(5/5f)
+            .paint(painterResource(id = R.drawable.chart),
+                contentScale = ContentScale.FillBounds)
+        ){
 
-    Box( modifier= Modifier
-        .fillMaxSize()
-        .aspectRatio(5/5f)
-        .paint(painterResource(id = R.drawable.chart),
-            contentScale = ContentScale.FillBounds)
-    ){
+            Box(
 
-        Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .zIndex(1f)
+                    .offsetByPercent(
+                        (xPosition/5).toFloat(),
+                        (yPosition/5).toFloat())
+                    .paint(painterResource(id=(R.drawable.taxi)))
+            )
 
-            modifier = Modifier
-                .size(50.dp)
-                .zIndex(1f)
-                .offsetByPercent(
-                    (xPosition/5).toFloat(),
-                    (yPosition/5).toFloat())
-            .paint(painterResource(id=(R.drawable.taxi)))
-        )
-
+        }
     }
 }
 

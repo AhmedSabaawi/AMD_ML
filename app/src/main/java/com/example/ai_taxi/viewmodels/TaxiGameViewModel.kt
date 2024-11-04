@@ -15,13 +15,13 @@ TaxiGameViewModel : ViewModel() {
     private val _rewardHistory = MutableStateFlow(listOf<Float>())
     val rewardHistory: StateFlow<List<Float>> get() = _rewardHistory
 
-    private val _x = MutableStateFlow(0)
+    private val _x = MutableStateFlow(20)
     val x: StateFlow<Int> =_x
-    private val _y = MutableStateFlow(0)
+    private val _y = MutableStateFlow(50)
     val y: StateFlow<Int> =_y
 
     private val _trained= MutableStateFlow(false)
-    private val trained: StateFlow<Boolean> = _trained
+    val trained: StateFlow<Boolean> = _trained
 
 
     private val actions = listOf("south", "north", "east", "west", "pick-up", "drop-off")
@@ -109,7 +109,7 @@ TaxiGameViewModel : ViewModel() {
 
     fun startGame() {
         if (!trained.value){
-            trainTaxiGame(sp, qValues, alpha.value, epsilon.value, gamma.value, decay.value, visualization = false)
+            trainGame()
         }
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
@@ -154,6 +154,7 @@ TaxiGameViewModel : ViewModel() {
             _x.value += pair.first
             _y.value += pair.second
             Log.d("Coordinates", "X: ${_x.value}, Y: ${_y.value}")
+            Thread.sleep(100)
         }
     }
 
