@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
@@ -30,46 +31,50 @@ fun QTable( navController: NavController , qValues: Array<FloatArray>) { // Add 
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color(0xFFD0D0CF))
             .verticalScroll(rememberScrollState())
-            .padding(16.dp) // Added padding for better spacing
+            .padding(8.dp) // Added padding for better spacing
     ) {
         // Back Button to return to the main menu
         Button(
             onClick = { navController.popBackStack() }, // Navigates back to the previous screen
-            modifier = Modifier.padding(bottom = 16.dp)
+            modifier = Modifier.padding(bottom = 12.dp),
+            colors = ButtonDefaults.buttonColors(Color.Black)
         ) {
-            Text("Back to Menu")
+
+            Text("Back to Menu", color = Color.White)
         }
         // Table headers
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.2f))
-                .padding(vertical = 8.dp)
+                .background(Color(0xFF555555))
+                .padding(vertical = 6.dp)
+
         ) {
             listOf("Nr", "South", "North", "East", "West", "Pick-up", "Drop-off").forEach { header ->
                 Text(
                     text = header,
-                    fontSize = 16.sp,
+                    fontSize = 10.sp,
                     modifier = Modifier.weight(1f),
                     color = MaterialTheme.colorScheme.onPrimary
                 )
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(4.dp))
 
         // Table rows
         qValues.forEachIndexed { state, actions ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 4.dp)
+                    .padding(vertical = 2.dp)
             ) {
                 // State column
                 Text(
-                    text = "$state",
-                    fontSize = 16.sp,
+                    text = "${state + 1}",
+                    fontSize = 9.sp,
                     modifier = Modifier.weight(1f),
                     color = MaterialTheme.colorScheme.onBackground
                 )
@@ -77,7 +82,7 @@ fun QTable( navController: NavController , qValues: Array<FloatArray>) { // Add 
                 actions.forEach { qValue ->
                     Text(
                         text = "${"%.2f".format(qValue)}",
-                        fontSize = 16.sp,
+                        fontSize = 9.sp,
                         modifier = Modifier.weight(1f),
                         color = MaterialTheme.colorScheme.onBackground
                     )

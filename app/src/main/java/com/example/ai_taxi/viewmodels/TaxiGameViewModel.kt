@@ -10,7 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.math.log
 
-class TaxiGameViewModel : ViewModel() {
+class
+TaxiGameViewModel : ViewModel() {
     private val _rewardHistory = MutableStateFlow(listOf<Float>())
     val rewardHistory: StateFlow<List<Float>> get() = _rewardHistory
 
