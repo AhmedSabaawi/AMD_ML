@@ -28,6 +28,7 @@ import com.example.ai_taxi.R
 import com.example.ai_taxi.components.ButtonBox
 import com.example.ai_taxi.components.ViewImage
 import com.example.ai_taxi.components.logo
+import com.example.ai_taxi.resetQTable
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 @Composable

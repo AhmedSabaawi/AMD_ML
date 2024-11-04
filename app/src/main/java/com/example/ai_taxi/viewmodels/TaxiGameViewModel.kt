@@ -20,6 +20,9 @@ TaxiGameViewModel : ViewModel() {
     private val _y = MutableStateFlow(0)
     val y: StateFlow<Int> =_y
 
+    private val _trained= MutableStateFlow(false)
+    private val trained: StateFlow<Boolean> = _trained
+
 
     private val actions = listOf("south", "north", "east", "west", "pick-up", "drop-off")
     private val actionCoordinates = mapOf(
@@ -81,6 +84,13 @@ TaxiGameViewModel : ViewModel() {
     fun updateDecay(newDecay: Float) {
         _decay.value = newDecay
     }
+    fun resetParameters(){
+        updateEpsilon(0.5f)
+        updateAlpha(0.5f)
+        updateGamma(0.5f)
+        updateDecay(0.5f)
+    }
+
 
     fun getEpsilon():Float{ return _epsilon.value}
     fun getAlpha():Float{return _alpha.value}
@@ -88,16 +98,19 @@ TaxiGameViewModel : ViewModel() {
     fun getDecay():Float{return _decay.value}
 
 
-    fun updateVisualization(newVisualization: Boolean) {
+    fun  updateVisualization(newVisualization: Boolean) {
         _visualization.value = newVisualization
     }
 
-    init {
+    fun trainGame (){
         trainTaxiGame(sp, qValues, alpha.value, epsilon.value, gamma.value, decay.value, visualization = false)
+        _trained.value=true
     }
 
     fun startGame() {
-        trainTaxiGame(sp, qValues, alpha.value, epsilon.value, gamma.value, decay.value, visualization = false)
+        if (!trained.value){
+            trainTaxiGame(sp, qValues, alpha.value, epsilon.value, gamma.value, decay.value, visualization = false)
+        }
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
     }
