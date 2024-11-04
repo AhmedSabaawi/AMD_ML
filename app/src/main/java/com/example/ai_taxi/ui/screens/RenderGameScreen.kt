@@ -21,6 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ai_taxi.R
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
+
 @Composable
 fun RenderGameScreen(
     viewModel: TaxiGameViewModel = viewModel()
@@ -30,12 +31,9 @@ fun RenderGameScreen(
 
     viewModel.startGame()
 
-//    val xPosition = 0
-//    val yPosition= 0
-
     Box( modifier= Modifier
         .fillMaxSize()
-        .aspectRatio(5/3f)
+        .aspectRatio(5/5f)
         .paint(painterResource(id = R.drawable.chart),
             contentScale = ContentScale.FillBounds)
     ){
@@ -47,7 +45,7 @@ fun RenderGameScreen(
                 .zIndex(1f)
                 .offsetByPercent(
                     (xPosition/5).toFloat(),
-                    (yPosition/3).toFloat())
+                    (yPosition/5).toFloat())
             .paint(painterResource(id=(R.drawable.taxi)))
         )
 

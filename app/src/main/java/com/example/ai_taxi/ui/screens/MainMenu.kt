@@ -17,6 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.ai_taxi.components.ButtonBox
 import com.example.ai_taxi.components.logo
+import com.example.ai_taxi.resetQTable
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 @Composable
