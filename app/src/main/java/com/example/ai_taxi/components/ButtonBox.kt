@@ -1,8 +1,10 @@
 package com.example.ai_taxi.components
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -14,12 +16,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+
+
+
+
 @Composable
 fun ButtonBox(text: String, onClick: () -> Unit = {}) {
     Button(
         onClick = onClick,
         modifier = Modifier
-            .fillMaxWidth()
+            .fillMaxWidth() // Adjust the width to prevent text wrapping
             .height(50.dp)
             .padding(horizontal = 32.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Color.Black),

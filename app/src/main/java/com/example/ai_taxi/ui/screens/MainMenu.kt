@@ -1,5 +1,6 @@
 package com.example.ai_taxi.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.ai_taxi.R
@@ -30,6 +32,7 @@ import com.example.ai_taxi.components.ViewImage
 import com.example.ai_taxi.components.logo
 import com.example.ai_taxi.resetQTable
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
+
 
 @Composable
 fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewModel()) {
@@ -61,7 +64,13 @@ fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewMo
         ButtonBox(text = "MENU") {
             navController.navigate("menu") // Navigate to the Menu screen
         }
-        ButtonBox(text = "RESET")
+        ButtonBox(text = "RESET") {
+            viewModel.resetParameters()
+            resetQTable(viewModel.qValues, viewModel.sp)
+
+
+
+        }
         ButtonBox(text = "QTABLE") {
             navController.navigate("Qtable")
         }

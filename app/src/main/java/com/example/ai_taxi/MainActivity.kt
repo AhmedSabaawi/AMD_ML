@@ -40,6 +40,8 @@ class MainActivity : ComponentActivity() {
                     composable("menu") { Menu(navController, taxiGameViewModel) }
                     composable("qtable") { QTable(navController,taxiGameViewModel.qValues) }
                     composable ("Start"){ Start(navController, taxiGameViewModel)  }
+
+
                 }
 
             }
