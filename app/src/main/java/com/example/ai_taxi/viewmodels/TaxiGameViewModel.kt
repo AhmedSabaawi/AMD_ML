@@ -123,6 +123,7 @@ TaxiGameViewModel : ViewModel() {
         }
         _x.value=xStart
         _y.value=yStart
+        pickedUp=false
 
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
