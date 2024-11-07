@@ -27,7 +27,13 @@ TaxiGameViewModel : ViewModel() {
     private var pickedUp = false
     private val _trained= MutableStateFlow(false)
     val trained: StateFlow<Boolean> = _trained
-    
+
+    private val _muted = MutableStateFlow(false)
+    val muted: StateFlow<Boolean> = _muted
+
+    fun updateMute(newMute: Boolean) {
+        _muted.value = newMute
+    }
 
 
     private val actions = listOf("south", "north", "east", "west", "pick-up", "drop-off")

@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,11 +22,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.ai_taxi.MainActivity
 import com.example.ai_taxi.R
 import com.example.ai_taxi.components.ButtonBox
 import com.example.ai_taxi.components.ViewImage
@@ -34,12 +38,17 @@ import com.example.ai_taxi.resetQTable
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 
 
+
 @Composable
 fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewModel()) {
 
     val backgroundColor = Color(0xFFD0D0CF)
     var showImage by remember { mutableStateOf(false) }
     val imageResId = R.drawable.instructions
+
+
+    val context = LocalContext.current
+    val main = context as MainActivity
 
     Column(
         modifier = Modifier
@@ -75,18 +84,35 @@ fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewMo
             navController.navigate("Qtable")
         }
 
-        IconButton(
-            onClick = { showImage = true },
-            modifier = Modifier.size(30.dp)
-        ) {
-            Text(text = "?", fontSize = 18.sp, color = Color.Black)
-        }
+        Row (horizontalArrangement = Arrangement.spacedBy(56.dp)
+            ) {
+            IconButton(
+                onClick = { showImage = true },
+                modifier = Modifier.size(30.dp)
+            ) {
+                Text(text = "?", fontSize = 24.sp, color = Color.Black)
+            }
 
-        // Show Image when showImage is true
-        if (showImage) {
-            ViewImage(imageResId = imageResId) {
-                showImage = false // Dismiss the image view when needed
+            // Show Image when showImage is true
+            if (showImage) {
+                ViewImage(imageResId = imageResId) {
+                    showImage = false // Dismiss the image view when needed
+                }
+            }
+
+            IconButton(
+                onClick = { main.muteMusic()  },
+                modifier = Modifier.size(30.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.speaker), // Replace with your image resource
+                    contentDescription = "Your Image",
+                    modifier = Modifier.size(30.dp), // You can change the size of the image
+
+                )
             }
         }
+
+
     }
 }

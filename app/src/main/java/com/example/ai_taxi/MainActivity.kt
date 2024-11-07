@@ -22,7 +22,6 @@ import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 class MainActivity : ComponentActivity() {
     private lateinit var mp: MediaPlayer
     private var mediaplayerInitialized = false
-    var muteMusic = 0 // if on 1 means the music is muted
 
     //Initiates the apps viewmodel, from here its gets passed to each component that needs the apps info
     private val taxiGameViewModel:  TaxiGameViewModel by viewModels()
@@ -67,7 +66,7 @@ class MainActivity : ComponentActivity() {
 
     fun playMusic(){
         try {
-            if (!mp.isPlaying){
+            if (!mp.isPlaying and taxiGameViewModel.muted.value == false){
 
                 mp.start()
             }
@@ -104,6 +103,18 @@ class MainActivity : ComponentActivity() {
 
 
 }
+
+    fun muteMusic(){
+        if (taxiGameViewModel.muted.value == false){
+            taxiGameViewModel.updateMute(true)
+            stopMusic()
+
+        }
+        else if(taxiGameViewModel.muted.value == true){
+            taxiGameViewModel.updateMute(false)
+            playMusic()
+        }
+    }
 
     //TODO: (Optional) Make a fun for mediaplayer so its accessible in one place.
 
