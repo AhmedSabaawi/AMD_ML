@@ -2,6 +2,7 @@ package com.example.ai_taxi
 
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -21,6 +22,7 @@ import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 class MainActivity : ComponentActivity() {
     private lateinit var mp: MediaPlayer
     private var mediaplayerInitialized = false
+    var muteMusic = 0 // if on 1 means the music is muted
 
     //Initiates the apps viewmodel, from here its gets passed to each component that needs the apps info
     private val taxiGameViewModel:  TaxiGameViewModel by viewModels()
@@ -47,6 +49,33 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+
+    
+
+    fun stopMusic(){
+        try {
+
+
+            if (mp.isPlaying) {
+                mp.pause()
+            }
+        }catch (e:Exception){
+            Log.e("Musicplayer", "Error when stoping music")
+        }
+    }
+
+    fun playMusic(){
+        try {
+            if (!mp.isPlaying){
+
+                mp.start()
+            }
+        }catch (e: Exception){
+           Log.e("musicplayer", "error when playing ")
+        }
+
+    }
     //What the app does when the user ends its process (quits the app)
     override fun onDestroy() {
         super.onDestroy()
@@ -60,15 +89,7 @@ class MainActivity : ComponentActivity() {
     override fun onPause() {
         super.onPause()
 
-
-//        if (mp.isPlaying){
-//            try {
-//                mp.pause()
-//            }catch (e: IllegalStateException){
-//                e.printStackTrace()
-//            }
-//
-//        }
+        stopMusic()
 
 
 
@@ -79,13 +100,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
 
-//        try {
-//            mp.start()
-//        }catch (e: IllegalStateException){
-//            e.printStackTrace()
-//        }
-//
-//    }
+        playMusic()
 
 
 }
