@@ -108,7 +108,7 @@ fun Menu(navController: NavController, viewModel: TaxiGameViewModel = viewModel(
                     onClick = {
                       viewModel.resetParameters()
 
-                        navController.navigate("MENU")
+//                        navController.navigate("MENU")
                     }, // Navigates back to the previous screen
                     colors = ButtonDefaults.buttonColors(Color.Black),
                     modifier = Modifier

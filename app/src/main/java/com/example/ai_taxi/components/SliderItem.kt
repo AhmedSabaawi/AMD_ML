@@ -16,6 +16,7 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,6 +33,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ai_taxi.viewmodels.TaxiGameViewModel
 import com.example.ai_taxi.MenuValues
+import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel = viewModel()) {
@@ -45,16 +47,19 @@ fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel 
         }
     }
 
-    fun loadData(): Float {
-        return when (MenuValues.valueOf(title.uppercase())) {
-            MenuValues.GAMMA -> viewModel.getGamma()
-            MenuValues.EPSILON -> viewModel.getEpsilon()
-            MenuValues.DECAY -> viewModel.getDecay()
-            MenuValues.ALPHA -> viewModel.getAlpha()
-        }
-    }
 
-    var sliderValue by remember { mutableStateOf(loadData()) }
+
+
+
+
+
+    val sliderValue  by when (title.uppercase()){
+        "GAMMA" -> viewModel.gamma.collectAsState()
+        "EPSILON" -> viewModel.epsilon.collectAsState()
+        "DECAY" -> viewModel.decay.collectAsState()
+        "ALPHA" -> viewModel.alpha.collectAsState()
+         else -> throw IllegalArgumentException("something went wrong")//Whatever doesnt matter
+    }
     var showDescription by remember { mutableStateOf(false) }
 
     Column(
@@ -116,7 +121,6 @@ fun SliderItem(title: String, description: String, viewModel: TaxiGameViewModel 
             Slider(
                 value = sliderValue,
                 onValueChange = {
-                    sliderValue = it
                     saveData(it) // Saves the value
                 },
                 valueRange = 0f..1f,
