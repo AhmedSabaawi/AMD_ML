@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -100,12 +101,17 @@ fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewMo
                 }
             }
 
+            val muteButtonPicture = if (viewModel.muted.collectAsState().value == false){
+                painterResource(id = R.drawable.speaker)}
+            else{
+                painterResource(id = R.drawable.muted)
+            }
             IconButton(
                 onClick = { main.muteMusic()  },
                 modifier = Modifier.size(30.dp)
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.speaker), // Replace with your image resource
+                    painter = muteButtonPicture, // Replace with your image resource
                     contentDescription = "Your Image",
                     modifier = Modifier.size(30.dp), // You can change the size of the image
 
