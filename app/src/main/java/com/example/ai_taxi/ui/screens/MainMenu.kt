@@ -101,6 +101,7 @@ fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewMo
                 }
             }
 
+            //Changes the picture of the button depending on the state (if it is muted or not)
             val muteButtonPicture = if (viewModel.muted.collectAsState().value == false){
                 painterResource(id = R.drawable.speaker)}
             else{
@@ -111,9 +112,9 @@ fun MainMenu(navController: NavController, viewModel: TaxiGameViewModel = viewMo
                 modifier = Modifier.size(30.dp)
             ) {
                 Image(
-                    painter = muteButtonPicture, // Replace with your image resource
-                    contentDescription = "Your Image",
-                    modifier = Modifier.size(30.dp), // You can change the size of the image
+                    painter = muteButtonPicture,
+                    contentDescription = "mute button",
+                    modifier = Modifier.size(30.dp),
 
                 )
             }

@@ -105,6 +105,7 @@ class MainActivity : ComponentActivity() {
 }
 
     fun muteMusic(){
+        //when used changes to the exact opposite of the actual value, since its a toggle
         if (taxiGameViewModel.muted.value == false){
             taxiGameViewModel.updateMute(true)
             stopMusic()
@@ -116,7 +117,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    //TODO: (Optional) Make a fun for mediaplayer so its accessible in one place.
+
 
 
 
