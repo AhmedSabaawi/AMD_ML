@@ -81,7 +81,7 @@ fun QTable( navController: NavController , qValues: Array<FloatArray>) { // Add 
                 // Action values columns
                 actions.forEach { qValue ->
                     Text(
-                        text = "${"%.2f".format(qValue)}",
+                        text = "${"%.5f".format(qValue)}",
                         fontSize = 9.sp,
                         modifier = Modifier.weight(1f),
                         color = MaterialTheme.colorScheme.onBackground

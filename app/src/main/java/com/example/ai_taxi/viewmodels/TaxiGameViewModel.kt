@@ -18,17 +18,16 @@ class
 TaxiGameViewModel : ViewModel() {
     private val _rewardHistory = MutableStateFlow(listOf<Float>())
     val rewardHistory: StateFlow<List<Float>> get() = _rewardHistory
-    private val xStart= 1
-    private val yStart =4
+    private val xStart = 1
+    private val yStart = 3
     private val _x = MutableStateFlow(xStart)
     val x: StateFlow<Int> =_x
     private val _y = MutableStateFlow(yStart)
     val y: StateFlow<Int> =_y
-
-
-
+    private var pickedUp = false
     private val _trained= MutableStateFlow(false)
     val trained: StateFlow<Boolean> = _trained
+    
 
 
     private val actions = listOf("south", "north", "east", "west", "pick-up", "drop-off")
@@ -66,7 +65,7 @@ TaxiGameViewModel : ViewModel() {
     private val _gamma = MutableStateFlow(0.9f)
     val gamma: StateFlow<Float> = _gamma
 
-    private val _decay = MutableStateFlow(0.1f)
+    private val _decay = MutableStateFlow(0.01f)
     val decay: StateFlow<Float> = _decay
 
     private val _visualization = MutableStateFlow(false)
@@ -96,10 +95,10 @@ TaxiGameViewModel : ViewModel() {
         _trained.value = newTrained
     }
     fun resetParameters(){
-        updateEpsilon(0.5f)
-        updateAlpha(0.5f)
-        updateGamma(0.5f)
-        updateDecay(0.5f)
+        updateGamma(0.2f)
+        updateAlpha(0.2f)
+        updateEpsilon(0.3f)
+        updateDecay(0.01f)
     }
 
 
@@ -124,6 +123,7 @@ TaxiGameViewModel : ViewModel() {
         }
         _x.value=xStart
         _y.value=yStart
+
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
     }
@@ -160,14 +160,33 @@ TaxiGameViewModel : ViewModel() {
         _destinationState.postValue(destination)
     }
 
+    private fun toIndex(x: Int, y: Int) : Int {
+        var index = (y * 5) + x
+        if(pickedUp) {
+            index += 25
+        }
+        return index
+    }
 
     private fun iterateThroughList(coordinatesList: List<Pair<Int, Int>>) {
+        var index: Int
+        var pair: Pair<Int, Int>
+
         CoroutineScope(Dispatchers.Main).launch {
-            for (i in coordinatesList.indices) {
-                val pair = coordinatesList[i]
+            delay(1000L)
+            for (i in 0 until 50) {
+                index = toIndex(x.value, y.value)
+                if(index == 23) {
+                    pickedUp = true
+                }
+                if(index == 45) {
+                    break
+                }
+                pair = coordinatesList[index]
                 _x.value += pair.first
                 _y.value += pair.second
                 Log.d("Coordinates", "X: ${_x.value}, Y: ${_y.value}")
+                Log.d("Index", "Index: ${index}")
                 delay(1000L)
             }
         }
@@ -197,10 +216,8 @@ TaxiGameViewModel : ViewModel() {
         return coordinates
     }
 
-
     fun processQValues(): List<Pair<Int, Int>> {
         val coordinatesList = mutableListOf<Pair<Int, Int>>()
-
         for (state in qValues.indices) {
             val coordinates = findBestActionCoordinates(state)
             coordinatesList.add(coordinates)
