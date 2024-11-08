@@ -24,7 +24,11 @@ TaxiGameViewModel : ViewModel() {
     val x: StateFlow<Int> =_x
     private val _y = MutableStateFlow(yStart)
     val y: StateFlow<Int> =_y
-    private var pickedUp = false
+
+
+    private var _pickedUp =MutableStateFlow(false)
+    val pickedUp: StateFlow<Boolean> = _pickedUp
+
     private val _trained= MutableStateFlow(false)
     val trained: StateFlow<Boolean> = _trained
 
@@ -129,7 +133,7 @@ TaxiGameViewModel : ViewModel() {
         }
         _x.value=xStart
         _y.value=yStart
-        pickedUp=false
+        _pickedUp.value=false
 
         val coordinatesList = processQValues()
         iterateThroughList(coordinatesList)
@@ -169,7 +173,7 @@ TaxiGameViewModel : ViewModel() {
 
     private fun toIndex(x: Int, y: Int) : Int {
         var index = (y * 5) + x
-        if(pickedUp) {
+        if(pickedUp.value) {
             index += 25
         }
         return index
@@ -184,7 +188,7 @@ TaxiGameViewModel : ViewModel() {
             for (i in 0 until 50) {
                 index = toIndex(x.value, y.value)
                 if(index == 23) {
-                    pickedUp = true
+                    _pickedUp.value = true
                 }
                 if(index == 45) {
                     break
